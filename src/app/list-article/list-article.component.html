@@ -1,0 +1,23 @@
+<div class="container">
+  <h1 class="row justify-content-md-center my-5">L'Actualité</h1>
+  <div class="row justify-content-center">
+    <div *ngFor="let article of data; let i = index" class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img [src]="[article.picture]" class="card-img" alt="...">
+          <p class="card-text row justify-content-center m-3">Auteur : {{ article.first_name }} {{ article.last_name }}</p>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ article.title }}</h5>
+            <p class="card-text">{{ article.describtion }}</p>
+            <div class="row">
+              <p class="col-lg-6 card-text"><small class="text-muted">{{ article.article_date | date: 'EEEE d MMMM y' | uppercase }}</small></p>
+              <button [routerLink]="[article.id_article]" class="btn btn-danger col-lg-6">Lire plus</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

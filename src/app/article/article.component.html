@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <h1>{{ data.title }}</h1>
+    <p class="row justify-content-center m-3 col-lg-12 text-muted"><small>Date de publication : {{ data.article_date | date: 'EEEE d MMMM y HH:ss' | uppercase }}</small></p>
+    <img [src]="[data.picture]" alt="pic">
+    <p class="m-5 text-size">{{ data.describtion }}</p>
+
+    <h3 class="row justify-content-center m-5">Auteur de l'article</h3>
+    <div class="card col-12 mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-2">
+          <img [src]="[data.picture_admin]" class="card-img" alt="profil-admin">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ data.first_name }} {{ data.last_name }}</h5>
+            <p class="card-text">{{ data.describtion_admin }}</p>
+            <div class="row">
+              <p class="col-lg-6 card-text"><small class="text-muted">{{ data.age }} ans - {{ data.ville }}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

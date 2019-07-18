@@ -1,0 +1,100 @@
+<div class="container">
+  <h1 class="row justify-content-md-center my-5">L'Actualité</h1>
+  <button (click)="ngSelected(0); open(content)" class="btn btn-primary offset-4 col-lg-4 offset-4">Ajouter un article</button>
+  <div class="row justify-content-center mt-4">
+    <div *ngFor="let article of data; let i = index" class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img [src]="[article.picture]" class="card-img" alt="...">
+          <p class="card-text row justify-content-center m-3">Auteur : {{ article.first_name }} {{ article.last_name }}</p>
+          <button (click)="ngSelected(article); open(content1)" class="btn btn-primary col-lg-6">Edit</button>
+          <button (click)="ngSelected(article); open(content2)" class="btn btn-primary col-lg-6">Remove</button>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ article.title }}</h5>
+            <p class="card-text">{{ article.describtion }}</p>
+            <div class="row">
+              <p class="col-lg-6 card-text"><small class="text-muted">{{ article.article_date | date: 'EEEE d MMMM y' | uppercase }}</small></p>
+              <button [routerLink]="[article.id_article]" class="btn btn-danger col-lg-6">Lire plus</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">ADD</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <div class="input-group">
+          <label for="titre">Titre</label>
+          <input type="text" class="form-control col-12" id="text" [value]="[dataSelected.title]" (keyup)="handleChange($event, 'title')">
+          <label for="url">Url Image</label>
+          <input type="text" class="form-control" id="url" [value]="[dataSelected.picture]" (keyup)="handleChange($event, 'picture')">
+          <label for="describtion">Text</label>
+          <textarea class="form-control" rows="3" id="describtion" [value]="[dataSelected.describtion]" (keyup)="handleChange($event, 'describtion')"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="ngPost(); modal.close('Save click')">Add</button>
+  </div>
+</ng-template>
+
+<ng-template #content1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">EDIT</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <div class="input-group">
+          <label for="titre">Titre</label>
+          <input type="text" class="form-control col-12" id="text" [value]="[dataSelected.title]" (keyup)="handleChange($event, 'title')">
+          <label for="url">Url Image</label>
+          <input type="text" class="form-control" id="url" [value]="[dataSelected.picture]" (keyup)="handleChange($event, 'picture')">
+          <label for="describtion">Text</label>
+          <textarea class="form-control" rows="3" id="describtion" [value]="[dataSelected.describtion]" (keyup)="handleChange($event, 'describtion')"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="ngPut(); modal.close('Save click')">Edit</button>
+  </div>
+</ng-template>
+
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">DELETE</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <div class="input-group">
+          <p>Voulez vous vraiment supprimer cet article ?</p>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">NO</button>
+    <button type="button" class="btn btn-outline-dark" (click)="ngDelete(); modal.close('Save click')">YES</button>
+  </div>
+</ng-template>
